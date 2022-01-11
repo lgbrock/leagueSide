@@ -18,8 +18,7 @@ const App = () => {
 		e.preventDefault();
 		const newLeague = {
 			name: e.target.name.value,
-			long: e.target.long.value,
-			lat: e.target.lat.value,
+			coordinates: [e.target.long.value, e.target.lat.value],
 			price: e.target.price.value,
 		};
 		leagueService.create(newLeague).then((returnedLeague) => {
@@ -33,7 +32,7 @@ const App = () => {
 			<League leagues={leagues} />
 			<form onSubmit={addLeague}>
 				<div>
-					<label>Name</label>
+					<label>Name:</label>
 					<input
 						name='name'
 						value={newLeague.name}
@@ -42,7 +41,7 @@ const App = () => {
 						}
 					/>
 
-					<label>Longitude</label>
+					<label>Longitude:</label>
 					<input
 						name='long'
 						value={newLeague.long}
@@ -51,7 +50,7 @@ const App = () => {
 						}
 					/>
 
-					<label>Latitude</label>
+					<label>Latitude:</label>
 
 					<input
 						name='lat'
@@ -61,7 +60,7 @@ const App = () => {
 						}
 					/>
 
-					<label>Price</label>
+					<label>Price:</label>
 					<input
 						name='price'
 						value={newLeague.price}
@@ -69,17 +68,18 @@ const App = () => {
 							setNewLeague({ ...newLeague, price: e.target.value })
 						}
 					/>
+					<br />
 
 					<button type='submit'>Add League</button>
 				</div>
 			</form>
-			<h1>LEAGUES TO SHOW</h1>
+			<h1>LEAGUES IN DATABASE</h1>
 			{leagues.map((league) => (
 				<div key={league.id}>
 					<h2>{league.name}</h2>
-					<p>{league.long}</p>
-					<p>{league.lat}</p>
-					<p>${league.price}</p>
+					<p>Longitude: {league.long}</p>
+					<p>Latitude: {league.lat}</p>
+					<p>Cost to Sponsor: ${league.price}</p>
 				</div>
 			))}
 

@@ -5,9 +5,16 @@ const sponsorSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	coordinates: {
-		type: [Number],
-		required: true,
+	location: {
+		type: {
+			type: String,
+			enum: ['Point'],
+			required: true,
+		},
+		coordinates: {
+			type: [Number],
+			required: true,
+		},
 	},
 	budget: {
 		type: Number,
@@ -23,4 +30,15 @@ sponsorSchema.set('toJSON', {
 	},
 });
 
-modules.exports = mongoose.model('Sponsor', sponsorSchema);
+module.exports = mongoose.model('Sponsor', sponsorSchema);
+
+// location: {
+// 	type: {
+// 		type: String,
+// 		enum: ['Point']
+// 	},
+// 	coordinates: {
+// 		type: [Number],
+// 		index: '2dsphere'
+// 	}
+// 	}

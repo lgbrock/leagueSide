@@ -3,7 +3,7 @@ import React from 'react';
 const League = (league) => {
 	return (
 		<div className='league'>
-			<div className='league-name'>{league.name}</div>
+			<h1>Add New League</h1>
 		</div>
 	);
 };

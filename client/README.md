@@ -1,3 +1,10 @@
+# -- OBJECTIVES --
+
+1. Add league to system
+   - teams can be added but need to clean up output on display
+2. Finding leagues to sponsor
+   -
+
 # -- NOTES --
 
 Add league to system - POST

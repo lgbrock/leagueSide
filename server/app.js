@@ -7,6 +7,7 @@ const middleware = require('./utils/middleware');
 const logger = require('./utils/logger');
 const mongoose = require('mongoose');
 const leaguesRouter = require('./controllers/leagues');
+const sponsorsRouter = require('./controllers/sponsors');
 
 logger.info('connecting to', config.MONGODB_URI);
 
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use(middleware.requestLogger);
 
 app.use('/api/leagues', leaguesRouter);
+app.use('/api/sponsors', sponsorsRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);

@@ -1,0 +1,12 @@
+POST http://localhost:5000/api/sponsors
+Content-Type: application/json
+
+{
+    "name": "Sponsor Name",
+    "type": "Point",
+    "coordinates": [
+        -122.4194155,
+        37.7749295
+    ],
+    "budget": 1000
+}
