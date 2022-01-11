@@ -1,0 +1,9 @@
+POST http://localhost:5000/api/leagues
+Content-Type: application/json
+
+{
+   "name": "League of Legends",
+   "long": -122.4194155,
+   "lat": 37.7749295,
+   "price": 20
+}
