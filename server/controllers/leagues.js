@@ -11,10 +11,9 @@ leaguesRouter.get('/', async (req, res, next) => {
 leaguesRouter.post('/', async (req, res, next) => {
 	const league = new League({
 		name: req.body.name,
-		long: req.body.long,
-		lat: req.body.lat,
-		price: req.body.price,
+		address: req.body.address,
 	});
+
 	const savedLeague = await league.save();
 	res.send(savedLeague);
 });

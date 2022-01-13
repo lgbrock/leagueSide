@@ -1,33 +1,46 @@
 const mongoose = require('mongoose');
-
-const pointSchema = new mongoose.Schema({
-	type: {
-		type: String,
-		enum: ['Point'],
-		required: true,
-	},
-	coordinates: {
-		type: [Number],
-		required: true,
-	},
-});
+const geocoder = require('../utils/geocoder');
 
 const leagueSchema = new mongoose.Schema({
 	name: {
 		type: String,
-		required: true,
+		required: [true, 'Please add a name'],
+		unique: true,
+		trim: true,
+		maxlength: [50, 'Name can not be more than 50 characters'],
+	},
+	address: {
+		type: String,
+		required: [true, 'Please add an address'],
 	},
 	location: {
-		type: pointSchema,
-		required: true,
+		type: {
+			type: String, // Don't do `{ location: { type: String } }`
+			enum: ['Point'], // 'location.type' must be 'Point'
+		},
+		coordinates: {
+			type: [Number],
+			index: '2dsphere', // create the geospatial index
+		},
+		formattedAddress: String,
 	},
-	price: {
-		type: Number,
-		required: true,
+	createdAt: {
+		type: Date,
+		default: Date.now,
 	},
 });
 
-pointSchema.index({ location: '2dsphere' });
+leagueSchema.pre('save', async function (next) {
+	const loc = await geocoder.geocode(this.address);
+	this.location = {
+		type: 'Point',
+		coordinates: [loc[0].longitude, loc[0].latitude],
+		formattedAddress: loc[0].formattedAddress,
+	};
+
+	this.address = undefined;
+	next();
+});
 
 leagueSchema.set('toJSON', {
 	transform: (document, returnedObject) => {
