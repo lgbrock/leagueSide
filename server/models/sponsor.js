@@ -1,30 +1,42 @@
 const mongoose = require('mongoose');
-
-const pointSchema = new mongoose.Schema({
-	type: {
-		type: String,
-		enum: ['Point'],
-		required: true,
-	},
-	coordinates: {
-		type: [Number],
-		required: true,
-	},
-});
+const geocoder = require('../utils/geocoder');
 
 const sponsorSchema = new mongoose.Schema({
-	name: {
+	address: {
 		type: String,
-		required: true,
+		required: [true, 'Please add an address'],
 	},
 	location: {
-		type: pointSchema,
-		required: true,
+		type: {
+			type: String, // Don't do `{ location: { type: String } }`
+			enum: ['Point'], // 'location.type' must be 'Point'
+		},
+		coordinates: {
+			type: [Number],
+			index: '2dsphere', // create the geospatial index
+		},
+		formattedAddress: String,
 	},
 	budget: {
 		type: Number,
 		required: true,
 	},
+	createdAt: {
+		type: Date,
+		default: Date.now,
+	},
+});
+
+sponsorSchema.pre('save', async function (next) {
+	const loc = await geocoder.geocode(this.address);
+	this.location = {
+		type: 'Point',
+		coordinates: [loc[0].longitude, loc[0].latitude],
+		formattedAddress: loc[0].formattedAddress,
+	};
+
+	this.address = undefined;
+	next();
 });
 
 sponsorSchema.set('toJSON', {
@@ -36,14 +48,3 @@ sponsorSchema.set('toJSON', {
 });
 
 module.exports = mongoose.model('Sponsor', sponsorSchema);
-
-// location: {
-// 	type: {
-// 		type: String,
-// 		enum: ['Point']
-// 	},
-// 	coordinates: {
-// 		type: [Number],
-// 		index: '2dsphere'
-// 	}
-// 	}

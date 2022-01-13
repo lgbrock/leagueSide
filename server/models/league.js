@@ -9,6 +9,10 @@ const leagueSchema = new mongoose.Schema({
 		trim: true,
 		maxlength: [50, 'Name can not be more than 50 characters'],
 	},
+	cost: {
+		type: Number,
+		required: [true, 'Please add a cost to sponsor your league'],
+	},
 	address: {
 		type: String,
 		required: [true, 'Please add an address'],

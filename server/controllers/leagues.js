@@ -11,6 +11,7 @@ leaguesRouter.get('/', async (req, res, next) => {
 leaguesRouter.post('/', async (req, res, next) => {
 	const league = new League({
 		name: req.body.name,
+		cost: req.body.cost,
 		address: req.body.address,
 	});
 
