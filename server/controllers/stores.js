@@ -13,10 +13,12 @@ storesRouter.get('/', async (req, res, next) => {
 storesRouter.post('/', async (req, res, next) => {
 	const store = await Store.create(req.body);
 
-	res.status(201).json({
+	res.status(200).json({
 		success: true,
 		data: store,
 	});
+
+	next();
 });
 
 module.exports = storesRouter;

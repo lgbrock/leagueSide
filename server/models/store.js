@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const geocoder = require('../utils/geocoder');
 
-const storeSchema = new mongoose.Schema({
+const StoreSchema = new mongoose.Schema({
 	storeId: {
 		type: String,
 		required: [true, 'Please add a storeId'],
@@ -29,7 +30,19 @@ const storeSchema = new mongoose.Schema({
 	},
 });
 
-storeSchema.set('toJSON', {
+StoreSchema.pre('save', async function (next) {
+	const loc = await geocoder.geocode(this.address);
+	this.location = {
+		type: 'Point',
+		coordinates: [loc[0].longitude, loc[0].latitude],
+		formattedAddress: loc[0].formattedAddress,
+	};
+
+	this.address = undefined;
+	next();
+});
+
+StoreSchema.set('toJSON', {
 	transform: (document, returnedObject) => {
 		returnedObject.id = returnedObject._id.toString();
 		delete returnedObject._id;
@@ -37,4 +50,4 @@ storeSchema.set('toJSON', {
 	},
 });
 
-module.exports = mongoose.model('Store', storeSchema);
+module.exports = mongoose.model('Store', StoreSchema);
