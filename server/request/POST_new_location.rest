@@ -1,0 +1,10 @@
+POST http://localhost:5000/api/locations
+Content-Type: application/json
+
+{
+     "name": "Big Ben",
+  "location": {
+    "coordinates": [-0.1268194, 51.5007292],
+    "type": "Point"
+  },
+}

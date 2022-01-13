@@ -51,7 +51,7 @@ const initialSponsors = [
 	},
 ];
 
-modules.exports = {
+module.exports = {
 	initialLeagues,
 	initialSponsors,
 };

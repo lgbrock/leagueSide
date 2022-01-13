@@ -1,16 +1,24 @@
 const mongoose = require('mongoose');
 
+const pointSchema = new mongoose.Schema({
+	type: {
+		type: String,
+		enum: ['Point'],
+		required: true,
+	},
+	coordinates: {
+		type: [Number],
+		required: true,
+	},
+});
+
 const leagueSchema = new mongoose.Schema({
 	name: {
 		type: String,
 		required: true,
 	},
-	long: {
-		type: Number,
-		required: true,
-	},
-	lat: {
-		type: Number,
+	location: {
+		type: pointSchema,
 		required: true,
 	},
 	price: {
@@ -18,6 +26,8 @@ const leagueSchema = new mongoose.Schema({
 		required: true,
 	},
 });
+
+pointSchema.index({ location: '2dsphere' });
 
 leagueSchema.set('toJSON', {
 	transform: (document, returnedObject) => {
