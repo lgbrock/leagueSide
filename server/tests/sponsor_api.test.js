@@ -14,3 +14,9 @@ beforeEach(async () => {
 		await newSponsor.save();
 	}
 });
+
+
+
+afterAll(() => {
+	mongoose.connection.close();
+});

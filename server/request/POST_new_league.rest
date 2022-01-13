@@ -3,9 +3,6 @@ Content-Type: application/json
 
 {
    "name": "League of Legends",
-   "location": {
-      type: "Point",
-      coordinates: [-73.856077, 40.848447]
-   },
-   "price": 2000
+   "cost": 1000,
+   "address": "123 Main Street"
 }

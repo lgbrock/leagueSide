@@ -15,27 +15,7 @@ beforeEach(async () => {
 	}
 });
 
-describe('Adding a new league', () => {
-	test('a valid league can be added', async () => {
-		const newLeague = {
-			name: 'Basketball',
-			location: {
-				type: 'Point',
-				coordinates: [-73.97, 40.77],
-			},
-			price: 1000,
-		};
-
-		await api
-			.post('/api/leagues')
-			.send(newLeague)
-			.expect(201)
-			.expect('Content-Type', /application\/json/);
-
-		const response = await api.get('/api/leagues');
-		expect(response.body.length).toBe(helper.initialSponsors.length + 1);
-	});
-});
+describe('Adding a new league', () => {});
 
 afterAll(() => {
 	mongoose.connection.close();

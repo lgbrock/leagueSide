@@ -1,10 +1,7 @@
 POST http://localhost:5000/api/sponsors
+Content-Type: application/json
 
 {
-  "name": "Big Ben",
-  "location": {
-    "coordinates": [-0.1268194, 51.5007292],
-    "type": "Point"
-  },
-  "budget": 1000
+  "address": "91 Bayard ln",
+  "budget": "5000"
 }
