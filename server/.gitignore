@@ -1,4 +1,2 @@
 /node_modules
 .env
-/models/store.js
-/controllers/stores.js
