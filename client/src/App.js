@@ -18,7 +18,7 @@ const App = () => {
 		e.preventDefault();
 		const newLeague = {
 			name: e.target.name.value,
-			coordinates: [e.target.long.value, e.target.lat.value],
+			coordinates: e.target.coordinates.value,
 			price: e.target.price.value,
 		};
 		leagueService.create(newLeague).then((returnedLeague) => {
@@ -41,26 +41,16 @@ const App = () => {
 						}
 					/>
 
-					<label>Longitude:</label>
+					<label>Location:</label>
 					<input
-						name='long'
-						value={newLeague.long}
+						name='location'
+						value={newLeague.location}
 						onChange={(e) =>
-							setNewLeague({ ...newLeague, long: e.target.value })
+							setNewLeague({ ...newLeague, location: e.target.value })
 						}
 					/>
 
-					<label>Latitude:</label>
-
-					<input
-						name='lat'
-						value={newLeague.lat}
-						onChange={(e) =>
-							setNewLeague({ ...newLeague, lat: e.target.value })
-						}
-					/>
-
-					<label>Price:</label>
+					<label>Cost to Sponsor:</label>
 					<input
 						name='price'
 						value={newLeague.price}
@@ -68,6 +58,7 @@ const App = () => {
 							setNewLeague({ ...newLeague, price: e.target.value })
 						}
 					/>
+
 					<br />
 
 					<button type='submit'>Add League</button>
@@ -77,8 +68,7 @@ const App = () => {
 			{leagues.map((league) => (
 				<div key={league.id}>
 					<h2>{league.name}</h2>
-					<p>Longitude: {league.long}</p>
-					<p>Latitude: {league.lat}</p>
+					<p>{league.location}</p>
 					<p>Cost to Sponsor: ${league.price}</p>
 				</div>
 			))}
