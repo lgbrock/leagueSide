@@ -2,28 +2,19 @@ const League = require('../models/league');
 
 const initialLeagues = [
 	{
-		name: 'Basketball',
-		long: -122.4194155,
-		lat: 37.7749295,
-		price: 50,
+		name: 'Central Park',
+		address: 'New York, NY',
+		budget: 3000,
 	},
 	{
-		name: 'Soccer',
-		long: -122.4194155,
-		lat: 37.7749295,
-		price: 60,
+		name: 'Sara D. Roosevelt Park',
+		address: 'New York, NY',
+		budget: 2000,
 	},
 	{
-		name: 'Baseball',
-		long: -122.4194155,
-		lat: 37.7749295,
-		price: 10,
-	},
-	{
-		name: 'Hockey',
-		long: -122.4194155,
-		lat: 37.7749295,
-		price: 20,
+		name: 'Polo Grounds',
+		address: 'New York, NY',
+		budget: 1000,
 	},
 ];
 

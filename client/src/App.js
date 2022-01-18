@@ -1,12 +1,15 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import leagueService from './services/leagues';
+import sponsorService from './services/sponsors';
 import League from './components/League';
 import Sponsor from './components/Sponsor';
 
 const App = () => {
 	const [leagues, setLeagues] = useState([]);
 	const [newLeague, setNewLeague] = useState([]);
+	const [sponsors, setSponsors] = useState([]);
+	const [newSponsor, setNewSponsor] = useState([]);
 
 	useEffect(() => {
 		leagueService.getAll().then((initialLeagues) => {
@@ -27,54 +30,60 @@ const App = () => {
 		});
 	};
 
+	const addSponsors = (e) => {
+		e.preventDefault();
+		const newSponsor = {
+			address: e.target.address.value,
+			budget: e.target.budget.value,
+			radius: e.target.radius.value,
+		};
+		sponsorService.create(newSponsor).then((returnedSponsor) => {
+			setSponsors(sponsors.concat(returnedSponsor));
+			setNewSponsor('');
+		});
+	};
+
+	const findSponsor = (e) => {
+		e.preventDefault();
+		const sponsor = {
+			name: e.target.name.value,
+			location: e.target.location.value,
+			radius: e.target.radius.value,
+			budget: e.target.budget.value,
+		};
+		leagueService.findSponsor(sponsor).then((returnedSponsor) => {
+			setLeagues(leagues.concat(returnedSponsor));
+			setNewLeague('');
+		});
+	};
+
+	const handleChange = (e) => {
+		console.log(e.target.value);
+		setNewLeague({
+			...newLeague,
+			[e.target.name]: e.target.value,
+		});
+	};
+
 	return (
-		<div>
-			<League leagues={leagues} />
+		<>
 			<form onSubmit={addLeague}>
-				<div>
-					<label>Name:</label>
-					<input
-						name='name'
-						value={newLeague.name}
-						onChange={(e) =>
-							setNewLeague({ ...newLeague, name: e.target.value })
-						}
-					/>
-
-					<label>Location:</label>
-					<input
-						name='location'
-						value={newLeague.location}
-						onChange={(e) =>
-							setNewLeague({ ...newLeague, location: e.target.value })
-						}
-					/>
-
-					<label>Cost to Sponsor:</label>
-					<input
-						name='price'
-						value={newLeague.price}
-						onChange={(e) =>
-							setNewLeague({ ...newLeague, price: e.target.value })
-						}
-					/>
-
-					<br />
-
-					<button type='submit'>Add League</button>
-				</div>
+				<League
+					leagues={leagues}
+					addLeague={addLeague}
+					newLeague={newLeague}
+					handleChange={handleChange}
+				/>
 			</form>
-			<h1>LEAGUES IN DATABASE</h1>
-			{leagues.map((league) => (
-				<div key={league.id}>
-					<h2>{league.name}</h2>
-					<p>{league.location}</p>
-					<p>Cost to Sponsor: ${league.price}</p>
-				</div>
-			))}
-
-			<Sponsor />
-		</div>
+			<form onSubmit={addSponsors}>
+				<Sponsor
+					leagues={leagues}
+					addSponsors={addSponsors}
+					newSponsor={newSponsor}
+					handleChange={handleChange}
+				/>
+			</form>
+		</>
 	);
 };
 

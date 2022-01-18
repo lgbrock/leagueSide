@@ -17,6 +17,11 @@ const sponsorSchema = new mongoose.Schema({
 		},
 		formattedAddress: String,
 	},
+	// search within radius of location
+	radius: {
+		type: Number,
+		required: [true, 'Please add a radius'],
+	},
 	budget: {
 		type: Number,
 		required: true,

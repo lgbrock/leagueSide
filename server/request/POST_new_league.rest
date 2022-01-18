@@ -2,7 +2,7 @@ POST http://localhost:5000/api/leagues
 Content-Type: application/json
 
 {
-   "name": "League of Legends",
-   "cost": 1000,
-   "address": "123 Main Street"
+   "name": "Turkey Dogs",
+   "budget": 3000,
+   "address": "Logansport, IN"
 }

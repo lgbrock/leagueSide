@@ -9,9 +9,9 @@ const leagueSchema = new mongoose.Schema({
 		trim: true,
 		maxlength: [50, 'Name can not be more than 50 characters'],
 	},
-	cost: {
+	budget: {
 		type: Number,
-		required: [true, 'Please add a cost to sponsor your league'],
+		required: [true, 'Please add a budget to sponsor your league'],
 	},
 	address: {
 		type: String,
@@ -19,12 +19,12 @@ const leagueSchema = new mongoose.Schema({
 	},
 	location: {
 		type: {
-			type: String, // Don't do `{ location: { type: String } }`
-			enum: ['Point'], // 'location.type' must be 'Point'
+			type: String,
+			enum: ['Point'],
 		},
 		coordinates: {
 			type: [Number],
-			index: '2dsphere', // create the geospatial index
+			index: '2dsphere',
 		},
 		formattedAddress: String,
 	},
