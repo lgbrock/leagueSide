@@ -8,12 +8,12 @@ const sponsorSchema = new mongoose.Schema({
 	},
 	location: {
 		type: {
-			type: String, // Don't do `{ location: { type: String } }`
-			enum: ['Point'], // 'location.type' must be 'Point'
+			type: String,
+			enum: ['Point'],
 		},
 		coordinates: {
 			type: [Number],
-			index: '2dsphere', // create the geospatial index
+			index: '2dsphere',
 		},
 		formattedAddress: String,
 	},
