@@ -1,28 +1,42 @@
 {
 	"leagues": [
 		{
-			"name": "Basketball",
-			"long": -122.4194155,
-			"lat": 37.7749295,
-			"price": 50
+			"name": "The Wyld Stallyns",
+			"lng": -73.97,
+			"lat": 40.77,
+			"cost": 4500
 		},
 		{
-			"name": "Soccer",
-			"long": -122.4194155,
-			"lat": 37.7749295,
-			"price": 60
+			"name": "Team Zoidberg",
+			"lng": -73.97,
+			"lat": 40.77,
+			"cost": 6000
 		},
 		{
-			"name": "Baseball",
-			"long": -122.4194155,
-			"lat": 37.7749295,
-			"price": 10
+			"name": "The Zoomers",
+			"lng": -73.97,
+			"lat": 40.77,
+			"cost": 1500
 		},
 		{
-			"name": "Hockey",
-			"long": -122.4194155,
-			"lat": 37.7749295,
-			"price": 20
+			"name": "North Horsburg Little League",
+			"lng": -73.97,
+			"lat": 40.77,
+			"cost": 3500
+		},
+		{
+			"name": "The Duloc Ogres",
+			"lng": -73.97,
+			"lat": 40.77,
+			"cost": 2500
+		}
+	],
+	"sponsors": [
+		{
+			"lng": -73.97,
+			"lat": 40.77,
+			"maxRadius": 5,
+			"budget": 8000
 		}
 	]
 }

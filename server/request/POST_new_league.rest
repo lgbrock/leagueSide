@@ -2,7 +2,8 @@ POST http://localhost:5000/api/leagues
 Content-Type: application/json
 
 {
-   "name": "Turkey Dogs",
-   "budget": 3000,
-   "address": "Logansport, IN"
+   "name": "Philadelphia Eagles",
+   "lng": -74.65,
+   "lat": 40.35,
+   "cost": 4000
 }

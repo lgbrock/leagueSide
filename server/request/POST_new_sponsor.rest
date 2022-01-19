@@ -2,6 +2,8 @@ POST http://localhost:5000/api/sponsors
 Content-Type: application/json
 
 {
-  "address": "Washington, DC",
-  "budget": "5000"
+   "lng": -74.00,
+   "lat": 40.35,
+   "maxRadius": 3,
+   "budget": 000
 }
